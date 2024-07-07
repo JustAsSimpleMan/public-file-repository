@@ -138,7 +138,7 @@ proxy-providers:
 
   DEFAULT:
     type: http
-    url: https://url-transfer.deno.dev?content=0D46uE0B8%2Bv2w%2F7Ei5pCtA%3D%3D%2CX%2BwFqcHMRLyt%2By1FhKlWuzq0GPozfJs%2FyUO1SK71Io6q5fFGsO2Gw0HCnJXqgrBaWqQ%2B8ogeeJLbadMW3U0LrNselJ32LL1d%2BrVNV%2B4PmyIxYMT2tHZUn%2BlELXnOZHDa
+    url: https://url-transfer.deno.dev?content=eatAmxY6vwOYLWQlzQx1dw%3D%3D%2CeGYaO1MkZaBVWhEebLsQyBxpoNfd882uIOpC9psrfZcC4QsNpwGeiC9yK2F5NlqhxV0BT4T3rn0rDf4CtG9f%2FL4mjv10Eyq18hZOHvx%2BphzfuE2AwqygUGkfP46gvNP%2BXhGYUGOs2VoypwJ43MrkgoE%2B2Di4cQEu5%2BPKqb%2FA20FvBQ%3D%3D
     path: ./providers/proxy/default.yaml
     interval: 21600
     health-check:
