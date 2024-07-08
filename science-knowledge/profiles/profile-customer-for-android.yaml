@@ -86,7 +86,6 @@ proxy-groups:
     use:
       - DEFAULT
       - crazygeeky.com
-      - anaer
 
   - name: DEFAULT
     type: select
