@@ -75,7 +75,6 @@ proxy-groups:
       - ermaozi
       - crazygeeky.com
       - proxypool
-      - anaer
       - tt.vg-mBFNB
 
   - name: AUTO-SELECT
@@ -108,11 +107,6 @@ proxy-groups:
     type: select
     use:
       - proxypool
-
-  - name: anaer
-    type: select
-    use:
-      - anaer
 
   - name: tt.vg-mBFNB
     type: select
@@ -174,16 +168,6 @@ proxy-providers:
     health-check:
       enable: false
       interval: 864000
-      url: http://www.gstatic.com/generate_204
-
-  anaer:
-    type: http
-    url: https://url-transfer.deno.dev/?content=2StZzolqJIO7cj0pI5keFw%3D%3D%2Cjref6gKjDpECJ9U6hy7U4zADfFkhEQ03vhdkCVFeloOC9Z76gDlIl1Hl79thAxiGNl%2F6cthC1QX15K0pFWLk2mwvD6%2BrP8opRehY
-    path: ./providers/proxy/anaer.yaml
-    interval: 21600
-    health-check:
-      enable: true
-      interval: 900
       url: http://www.gstatic.com/generate_204
 
   tt.vg-mBFNB:
