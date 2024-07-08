@@ -1,0 +1,10 @@
+payload: # 直连域名补丁
+  - domain-direct-example
+  - www.bing.com
+  - "+.cn.bing.*"
+  - "+.cn.*.bing.*"
+  - "+.cn.*.*.bing.*"
+  - "+.cn.*.*.*.bing.*"
+  - "+.cn.*.*.*.*.bing.*"
+  - "+.cn.*.*.*.*.*.bing.*"
+  - "+.microsoft.com"

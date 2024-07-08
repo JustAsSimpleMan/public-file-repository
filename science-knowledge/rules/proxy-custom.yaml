@@ -1,0 +1,3 @@
+payload: # 自定义代理规则，classical 类型
+  - DOMAIN,proxy-example
+  - DOMAIN-KEYWORD,google
