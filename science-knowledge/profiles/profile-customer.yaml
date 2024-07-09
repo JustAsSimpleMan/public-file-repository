@@ -77,6 +77,7 @@ proxy-groups:
       - proxypool
       - anaer
       - tt.vg-mBFNB
+      - xrayvip
 
   - name: AUTO-SELECT
     type: url-test
@@ -118,6 +119,11 @@ proxy-groups:
     type: select
     use:
       - tt.vg-mBFNB
+
+  - name: xrayvip
+    type: select
+    use:
+      - xrayvip
 
 
 # 代理供应商
@@ -196,6 +202,15 @@ proxy-providers:
       interval: 3600
       url: http://www.gstatic.com/generate_204
 
+  xrayvip:
+    type: http
+    url: https://url-transfer.deno.dev/?content=vZiLjzwGTNS33%2BTLTgUJ8Q%3D%3D%2CJIBlZ7L%2FSkAmaV%2F9WxeYsN%2BO6D8ZSW%2BWoDMu1bXuZLXucP63vBlqhd45C3gsbPpzEA%3D%3D
+    path: ./providers/proxy/xrayvip.yaml
+    interval: 21600
+    health-check:
+      enable: true
+      interval: 3600
+      url: http://www.gstatic.com/generate_204
 
 
 # 规则供应商，类似节点供应商
