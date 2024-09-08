@@ -71,12 +71,15 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-SELECT
-      # - DEFAULT
+      ### 常用
       - crazygeeky.com
       - anaer
       - xrayvip
-      - ermaozi
+
+      ### 不常用，但可能用到
+      # - DEFAULT
       - MAINLAND
+      - ermaozi
 
   - name: AUTO-SELECT
     type: url-test
@@ -88,21 +91,6 @@ proxy-groups:
       - crazygeeky.com
       - anaer
       - xrayvip
-
-  - name: MAINLAND
-    type: select
-    use:
-      - MAINLAND
-
-  # - name: DEFAULT
-  #   type: select
-  #   use:
-  #     - DEFAULT
-
-  - name: ermaozi
-    type: select
-    use:
-      - ermaozi
 
   - name: crazygeeky.com
     type: select
@@ -118,6 +106,21 @@ proxy-groups:
     type: select
     use:
       - xrayvip
+
+  # - name: DEFAULT
+  #   type: select
+  #   use:
+  #     - DEFAULT
+
+  - name: ermaozi
+    type: select
+    use:
+      - ermaozi
+
+  - name: MAINLAND
+    type: select
+    use:
+      - MAINLAND
 
 
 # 代理供应商
