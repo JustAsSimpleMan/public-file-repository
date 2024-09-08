@@ -71,13 +71,12 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-SELECT
-      - DEFAULT
-      - ermaozi
+      # - DEFAULT
       - crazygeeky.com
-      - proxypool
       - anaer
-      - tt.vg-mBFNB
       - xrayvip
+      - ermaozi
+      - MAINLAND
 
   - name: AUTO-SELECT
     type: url-test
@@ -86,14 +85,19 @@ proxy-groups:
     proxies:
       - 仅考虑将数量较少的策略组加入自动选择
     use:
-      - DEFAULT
       - crazygeeky.com
       - anaer
+      - xrayvip
 
-  - name: DEFAULT
+  - name: MAINLAND
     type: select
     use:
-      - DEFAULT
+      - MAINLAND
+
+  # - name: DEFAULT
+  #   type: select
+  #   use:
+  #     - DEFAULT
 
   - name: ermaozi
     type: select
@@ -105,20 +109,10 @@ proxy-groups:
     use:
       - crazygeeky.com
 
-  - name: proxypool
-    type: select
-    use:
-      - proxypool
-
   - name: anaer
     type: select
     use:
       - anaer
-
-  - name: tt.vg-mBFNB
-    type: select
-    use:
-      - tt.vg-mBFNB
 
   - name: xrayvip
     type: select
@@ -142,10 +136,20 @@ proxy-providers:
   #
   #############################################################
 
-  DEFAULT:
+  # DEFAULT:
+  #   type: http
+  #   url: https://url-transfer.deno.dev?content=eatAmxY6vwOYLWQlzQx1dw%3D%3D%2CeGYaO1MkZaBVWhEebLsQyBxpoNfd882uIOpC9psrfZcC4QsNpwGeiC9yK2F5NlqhxV0BT4T3rn0rDf4CtG9f%2FL4mjv10Eyq18hZOHvx%2BphzfuE2AwqygUGkfP46gvNP%2BXhGYUGOs2VoypwJ43MrkgoE%2B2Di4cQEu5%2BPKqb%2FA20FvBQ%3D%3D
+  #   path: ./providers/proxy/default.yaml
+  #   interval: 21600
+  #   health-check:
+  #     enable: true
+  #     interval: 1200
+  #     url: http://www.gstatic.com/generate_204
+
+  MAINLAND:
     type: http
-    url: https://url-transfer.deno.dev?content=eatAmxY6vwOYLWQlzQx1dw%3D%3D%2CeGYaO1MkZaBVWhEebLsQyBxpoNfd882uIOpC9psrfZcC4QsNpwGeiC9yK2F5NlqhxV0BT4T3rn0rDf4CtG9f%2FL4mjv10Eyq18hZOHvx%2BphzfuE2AwqygUGkfP46gvNP%2BXhGYUGOs2VoypwJ43MrkgoE%2B2Di4cQEu5%2BPKqb%2FA20FvBQ%3D%3D
-    path: ./providers/proxy/default.yaml
+    url: https://url-transfer.deno.dev?content=oAOn8xrMe2DobET1yUeTWA%3D%3D%2C3u2VlAAeA7IaLMb%2BkB%2BZlyBLHP2IbmN1EaMd3btorefQokuj9M4%2FztA6%2FsNI7aQHARcwRWvq9EeKibfA3ShgMUE3IOsnnEFD2zHI9yBWaHAicuw7yXMOOe3g7ltX5%2BUQBOjNqOy7OpA1rIikBG%2BwminjoS3tVvU5r%2BZS8I0xINgpUp8%3D
+    path: ./providers/proxy/mainland.yaml
     interval: 21600
     health-check:
       enable: true
@@ -172,16 +176,6 @@ proxy-providers:
       interval: 900
       url: http://www.gstatic.com/generate_204
 
-  proxypool:
-    type: http
-    url: https://url-transfer.deno.dev?content=%2B5i06dEZlKaMSpw52nBduQ%3D%3D%2CAULjuDsJh1gpXDCdxgWUGmmGn1IWXsLm9pLD%2Bm95150ha7aBrFcAAw5Qkp7eSlV%2B%2BoKZtg%3D%3D
-    path: ./providers/proxy/proxypool.yaml
-    interval: 21600
-    health-check:
-      enable: false
-      interval: 864000
-      url: http://www.gstatic.com/generate_204
-
   anaer:
     type: http
     url: https://url-transfer.deno.dev/?content=2StZzolqJIO7cj0pI5keFw%3D%3D%2Cjref6gKjDpECJ9U6hy7U4zADfFkhEQ03vhdkCVFeloOC9Z76gDlIl1Hl79thAxiGNl%2F6cthC1QX15K0pFWLk2mwvD6%2BrP8opRehY
@@ -190,16 +184,6 @@ proxy-providers:
     health-check:
       enable: true
       interval: 900
-      url: http://www.gstatic.com/generate_204
-
-  tt.vg-mBFNB:
-    type: http
-    url: https://url-transfer.deno.dev/?content=sdWmH%2BiEiTAyMas4ENy5tg%3D%3D%2CKJB3oe4ymWyq90p5qLA%2B0%2F%2BDIRTCtaj%2BfjbpMOabtsDuYuU%3D
-    path: ./providers/proxy/tt.vg-mBFNB.yaml
-    interval: 21600
-    health-check:
-      enable: true
-      interval: 3600
       url: http://www.gstatic.com/generate_204
 
   xrayvip:
