@@ -78,8 +78,8 @@ proxy-groups:
 
       ### 不常用，但可能用到
       # - DEFAULT
-      - MAINLAND
       - ermaozi
+      - MAINLAND
 
   - name: AUTO-SELECT
     type: url-test
