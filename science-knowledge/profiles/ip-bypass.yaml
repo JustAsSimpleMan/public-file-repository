@@ -1,0 +1,85 @@
+mixed-port: 7890
+
+allow-lan: false   # 局域网覆盖，连接同一个网络，将其它设备的网络代理指向开启 clash 设备的 IP 及代理端口
+bind-address: "*"  # 局域网覆盖的地址，* 表示所有
+mode: rule
+log-level: info
+ipv6: false
+external-controller: 127.0.0.1:9090
+
+dns:
+  enabled: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  default-nameserver:            # DNS servers, 仅 Do53 协议，即：纯 IP 
+    - 1.1.1.1                    # Cloudflare 
+    - 8.8.8.8                    # google 
+  enhanced-mode: fake-ip         # 默认 fake-ip
+  fake-ip-range: 198.18.0.1/16   # Fake IP addresses pool CIDR
+  fake-ip-filter:                # 对以下 IP 不返回 fake IP，返回真实 IP
+    - '*.lan'
+    - '*.msftconnecttest.com'
+
+
+# 策略组
+proxy-groups:
+
+  - name: SELECT-PROXY
+    type: select
+    proxies:
+      - AUTO-MAINLAND
+      - AUTO-CRAZYGEEKY
+      - MAINLAND
+      - CRAZYGEEKY
+
+  - name: AUTO-MAINLAND
+    type: url-test
+    interval: 600
+    url: http://www.gstatic.com/generate_204
+    use:
+      - MAINLAND
+
+  - name: AUTO-CRAZYGEEKY
+    type: url-test
+    interval: 600
+    url: http://www.gstatic.com/generate_204
+    use:
+      - CRAZYGEEKY
+
+  - name: MAINLAND
+    type: select
+    use:
+      - MAINLAND
+
+  - name: CRAZYGEEKY
+    type: select
+    use:
+      - CRAZYGEEKY
+
+
+proxy-providers:
+
+  MAINLAND:
+    type: http
+    url: https://url-transfer.deno.dev?content=oAOn8xrMe2DobET1yUeTWA%3D%3D%2C3u2VlAAeA7IaLMb%2BkB%2BZlyBLHP2IbmN1EaMd3btorefQokuj9M4%2FztA6%2FsNI7aQHARcwRWvq9EeKibfA3ShgMUE3IOsnnEFD2zHI9yBWaHAicuw7yXMOOe3g7ltX5%2BUQBOjNqOy7OpA1rIikBG%2BwminjoS3tVvU5r%2BZS8I0xINgpUp8%3D
+    path: ./providers/proxy/mainland.yaml
+    interval: 21600
+    health-check:
+      enable: true
+      interval: 1200
+      url: http://www.gstatic.com/generate_204
+
+  CRAZYGEEKY:
+    type: http
+    url: https://url-transfer.deno.dev?content=TcW9BT5QFRe4U0d65pF5Vw%3D%3D%2CZrt0s3Hf4DR14vpN%2FDyFWLmnce1je64St4RXz1t%2FH1nRkpggwDteIraUhgOZTVSe7iYyU6sQFQ4G5w%3D%3D
+    path: ./providers/proxy/crazygeeky.com.yaml
+    interval: 21600
+    health-check:
+      enable: true
+      interval: 900
+      url: http://www.gstatic.com/generate_204
+
+
+rules:
+  - DST-PORT,17500,SELECT-PROXY
+  - MATCH,DIRECT
