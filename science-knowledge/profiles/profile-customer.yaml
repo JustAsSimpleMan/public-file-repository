@@ -1,36 +1,12 @@
-#  自定义配置文件，大小写敏感!
-
-
-# Port of HTTP(S) proxy server on the local end
-# port: 7890
-
-# Port of SOCKS5 proxy server on the local end
-# socks-port: 7891
-
-# (HTTP and SOCKS5 in one port) 局域网代理需使用混合端口
+# 
 mixed-port: 7890
-
-# Transparent proxy server port for Linux and macOS (Redirect TCP and TProxy UDP)
-# redir-port: 7892
-
-# Transparent proxy server port for Linux (TProxy TCP and TProxy UDP)
-# tproxy-port: 7893
-
 allow-lan: false   # 局域网覆盖，连接同一个网络，将其它设备的网络代理指向开启 clash 设备的 IP 及代理端口
 bind-address: "*"  # 局域网覆盖的地址，* 表示所有
 mode: rule
 log-level: info
-# When set to false, resolver won't translate hostnames to IPv6 addresses
 ipv6: false
 external-controller: 127.0.0.1:9090
 
-
-##### Clash 开启 tun 模式无法上网（显示无法连接到 internet）时，把 Clash 创建的虚拟网卡的 internet 连接共享（ICS）禁用后再启用可以解决问题
-##### 或者在"网络连接"面板中把所有不支持设置 ICS 的连接（例如：传入的连接）删除
-
-# DNS 设置对于 `Clash For Windows v.020.39` 系统代理模式无效，仅在 TUN 模式下生效，需要在 Clash 页面中配置，
-# 且即使在 TUN 模式下，DNS 解析也不一定全走 Clash 配置的 DNS 服务器，最好给电脑的网络适配器指定 DNS 服务器，当不走 Clash 配置时还能有个兜底的设置。
-# 这里的设置作为版本兼容(低版本和 Android 版)配置
 dns:
   enabled: true
   listen: 0.0.0.0:1053
@@ -38,8 +14,6 @@ dns:
   default-nameserver:            # DNS servers, 仅 Do53 协议，即：纯 IP 
     - 1.1.1.1                    # Cloudflare 
     - 8.8.8.8                    # google 
-  # 伪 IP，设备接收到域名需要进行 DNS 解析拿到 IP 建立连接才能发送请求
-  # Clash 直接返回一个假的 IP，让设备与假 IP 建立连接并发送请求，从而避免本地 DNS 解析
   enhanced-mode: fake-ip         # 默认 fake-ip
   fake-ip-range: 198.18.0.1/16   # Fake IP addresses pool CIDR
   fake-ip-filter:                # 对以下 IP 不返回 fake IP，返回真实 IP
@@ -47,38 +21,22 @@ dns:
     - '*.msftconnecttest.com'
 
 proxies:
-  - {name: 仅考虑将数量较少的策略组加入自动选择, type: http, server: 127.0.0.1, port: 443}
+  - {name: 仅将数量较少的策略组加入自动选择, type: http, server: 127.0.0.1, port: 443}
 
 
 # 策略组
 proxy-groups:
-  # - name: URL-TEST                              # 策略组名称
-  #   type: url-test                              # 策略组类型。select: 手动选择。url-test: 自动选择，通过 `url` 对节点进行测试，选取延时最低的节点。
-  #   interval: 300                               # 测速时间间隔
-  #   url: http://www.gstatic.com/generate_204    # 测速网址
-  #   proxies:                                    # 可引用节点，也可引用其他策略组（因为每个策略组都会选用一个节点，因此一个策略组也被视为一个节点）。无法引用代理供应商。
-  #     - proxy1                                  # 存在 `proxies` 的策略组不能与代理供应商同名，因为二者都具有节点集的性质。
-  #     - proxy2                                  # 如果策略组作为节点集（`proxies`），且类型为自动选择（`url-test`），则健康检查参数（`interval` 和 `url`）不可少。
-  #   use:                                        # 只能引用代理供应商，不能引用其他策略组。
-  #     - proxy-provide1
-  #     - proxy-provide2
-  #
-  # ################ 补充说明 ################
-  # `interval` 属性与节点的自动选择并不是"完全"的触发关系，因为对于 `use`，它有自己的一套测速机制，"自动选择"只是在已测速节点中选择一个延时最低的节点。
-  # "自动选择" 取决于节点的测速结果，而 `proxies` 和 `use` 下的节点的测速结果又取决于它们各自的 `interval` 和 `url` 属性。
 
   - name: SELECT-PROXY
     type: select
     proxies:
       - AUTO-SELECT
-      ### 常用
-      - crazygeeky.com
-      - anaer
+      - crazygeeky
       - xrayvip
-
-      ### 不常用，但可能用到
-      # - DEFAULT
+      - itxve
+      - snakem982
       - ermaozi
+      - ChatGPT-AUTO
       - MAINLAND
 
   - name: AUTO-SELECT
@@ -86,35 +44,48 @@ proxy-groups:
     interval: 864000
     url: http://www.gstatic.com/generate_204
     proxies:
-      - 仅考虑将数量较少的策略组加入自动选择
+      - 仅将数量较少的策略组加入自动选择
     use:
-      - crazygeeky.com
-      - anaer
+      - crazygeeky
       - xrayvip
+      - itxve
+      - snakem982
+      - ermaozi
 
-  - name: crazygeeky.com
+  - name: itxve
     type: select
     use:
-      - crazygeeky.com
+      - itxve
 
-  - name: anaer
+  - name: snakem982
     type: select
     use:
-      - anaer
+      - snakem982
+
+  - name: crazygeeky
+    type: select
+    use:
+      - crazygeeky
 
   - name: xrayvip
     type: select
     use:
       - xrayvip
 
-  # - name: DEFAULT
-  #   type: select
-  #   use:
-  #     - DEFAULT
-
   - name: ermaozi
     type: select
     use:
+      - ermaozi
+
+  - name: ChatGPT-AUTO
+    type: fallback
+    url: https://chatgpt.com/
+    interval: 600
+    use:
+      - crazygeeky
+      - xrayvip
+      - itxve
+      - snakem982
       - ermaozi
 
   - name: MAINLAND
@@ -125,29 +96,6 @@ proxy-groups:
 
 # 代理供应商
 proxy-providers:
-  #############################################################
-  #
-  # proxy-provider-example:                                   # 代理（节点）供应商名字。一个代理供应商作为一个节点集。
-  #   type: http                                              # 有两种类型：http: 通过 http 链接（`url`）获取。file: 通过 `path` 路径读取本地文件
-  #   url: https://domain.com/clash-nodes-example.yaml        # 下载链接，文件下载后会保存到 `path` 路径下
-  #   path: ./proxy-providers/clash-nodes-example.yaml        # 节点文件读取路径
-  #   interval: 21600                                         # 隔多少秒从网络上拉取一次资源
-  #   health-check:                                           # 节点健康检查配置
-  #     enable: true                                          # 是否允许健康检查
-  #     interval: 300                                         # 隔多少秒进行一次健康检查
-  #     url: http://www.gstatic.com/generate_204              # 测速网址
-  #
-  #############################################################
-
-  # DEFAULT:
-  #   type: http
-  #   url: https://url-transfer.deno.dev?content=eatAmxY6vwOYLWQlzQx1dw%3D%3D%2CeGYaO1MkZaBVWhEebLsQyBxpoNfd882uIOpC9psrfZcC4QsNpwGeiC9yK2F5NlqhxV0BT4T3rn0rDf4CtG9f%2FL4mjv10Eyq18hZOHvx%2BphzfuE2AwqygUGkfP46gvNP%2BXhGYUGOs2VoypwJ43MrkgoE%2B2Di4cQEu5%2BPKqb%2FA20FvBQ%3D%3D
-  #   path: ./providers/proxy/default.yaml
-  #   interval: 21600
-  #   health-check:
-  #     enable: true
-  #     interval: 1200
-  #     url: http://www.gstatic.com/generate_204
 
   MAINLAND:
     type: http
@@ -156,8 +104,8 @@ proxy-providers:
     interval: 21600
     health-check:
       enable: true
-      interval: 1200
-      url: http://www.gstatic.com/generate_204
+      interval: 600
+      url: http://connect.rom.miui.com/generate_204
 
   ermaozi:
     type: http
@@ -166,27 +114,17 @@ proxy-providers:
     interval: 21600
     health-check:
       enable: false
-      interval: 86400
+      interval: 600
       url: http://www.gstatic.com/generate_204
 
-  crazygeeky.com:
+  crazygeeky:
     type: http
     url: https://url-transfer.deno.dev?content=TcW9BT5QFRe4U0d65pF5Vw%3D%3D%2CZrt0s3Hf4DR14vpN%2FDyFWLmnce1je64St4RXz1t%2FH1nRkpggwDteIraUhgOZTVSe7iYyU6sQFQ4G5w%3D%3D
     path: ./providers/proxy/crazygeeky.com.yaml
     interval: 21600
     health-check:
       enable: true
-      interval: 900
-      url: http://www.gstatic.com/generate_204
-
-  anaer:
-    type: http
-    url: https://url-transfer.deno.dev/?content=2StZzolqJIO7cj0pI5keFw%3D%3D%2Cjref6gKjDpECJ9U6hy7U4zADfFkhEQ03vhdkCVFeloOC9Z76gDlIl1Hl79thAxiGNl%2F6cthC1QX15K0pFWLk2mwvD6%2BrP8opRehY
-    path: ./providers/proxy/anaer.yaml
-    interval: 21600
-    health-check:
-      enable: true
-      interval: 900
+      interval: 600
       url: http://www.gstatic.com/generate_204
 
   xrayvip:
@@ -196,26 +134,31 @@ proxy-providers:
     interval: 21600
     health-check:
       enable: true
-      interval: 3600
+      interval: 600
+      url: http://www.gstatic.com/generate_204
+
+  itxve:
+    type: http
+    url: https://url-transfer.deno.dev?content=QaT64DW3uPXR0wJqXfa3SQ%3D%3D%2C2UGlfsKBeNGN2rwhpLvcgPyXiDspYThBT6QDhhUjJwPH8r%2FjwGscTSAtg8RvKtBbXXUxFwP2zBkFzKo%2FLZNgICUONLD1eKs6AAfbNrq2UFcMSQ%3D%3D
+    path: ./providers/proxy/itxve.yaml
+    interval: 21600
+    health-check:
+      enable: true
+      interval: 600
+      url: http://www.gstatic.com/generate_204
+
+  snakem982:
+    type: http
+    url: https://url-transfer.deno.dev?content=3XFO36i85G5H6%2BK75hB40A%3D%3D%2CNIImJVea7yNbtBjjjb4lpAA4lpY5G2r4bBLNV2V0mg4cyxQv7HeYVwZJ6%2Bh%2FZp50vK5b0mtSO1QMtoeekS1mR8PjSaBJ3y25g3FwvPy69rUV72MDaZgKsy4dNLSCpxC2BQ%3D%3D
+    path: ./providers/proxy/snakem982.yaml
+    interval: 21600
+    health-check:
+      enable: true
+      interval: 600
       url: http://www.gstatic.com/generate_204
 
 
-# 规则供应商，类似节点供应商
-#
-# 规则类型 `behavior` 有 3 种：
-#   1. classical: 经典的配置方式：类型, 条件。例: - IP-CIDR,0.0.0.0/32,no-resolve。classical 不支持通配符，引号字符('") 被视为普通字符串。
-#   2. ipcidr: 基于 IP 地址和 CIDR（Classless Inter-Domain Routing 无类别域间路由）的匹配。
-#   3. domain: 如果内容是一串使用引号('") 引住的字符串，则可以使用通配符（参考 Clash 通配符），否则对字符进行完全匹配。
 rule-providers:
-  #############################################################
-  # ------------------- 参考代理供应商的描述 -------------------
-  # rule-provider-example:
-  #   type: http                                               # 规则供应商类型，有 http 和 file 两种
-  #   behavior: classical                                      # 规则类型
-  #   url: http://domain.com/rule-provider-example.yaml
-  #   path: ./ruleset/rule-provider-example.yaml
-  #
-  #############################################################
 
   reject-custom: # 自定义黑名单，大范围匹配时使用
     type: http
@@ -278,32 +221,7 @@ rule-providers:
     path: ./ruleset/cncidr.yaml
 
 
-# 一个网络请求可能基于域名，也可能基于 IP，Clash 根据规则配置对请求进行处理
-#
-# `rules` 规则配置，它的规则类型 `behavior` 为 classical，不支持通配符。格式为: 
-# 匹配类型, 匹配条件, 流量走向（有 阻止(REJECT)，直连(DIRECT)，和策略组）[, 禁止 DNS 解析（可选）]
-#
-# 按由上到下顺序匹配
 rules:
-  ###############################################
-  #
-  # - RULE-SET,rule-set-example,DIRECT           # 规则集匹配，引用规则提供者(rule-providers)的定义
-  # - DOMAIN,example.com,proxy-provider-example  # 完全匹配域名字符串，不能加引号，引号被当作普通字符串
-  # - IP-CIDR,0.0.0.0/32,DIRECT                  # IP 段匹配。因为域名与 IP 不是同一个东西，所以对于基于域名的请求，要先进行 DNS 解析得到 IP 后才能对比
-  # - IP-CIDR6,0000::1/64,DIRECT                 # IPv6 的 CIDR 匹配，需要在 Clash 设置页面里开启 IPv6
-  # - SRC-IP-CIDR,0.0.0.0/32,DIRECT,no-resolve   # 出站子网 IP 段。no-resolve: 不做 DNS 解析。每一个涉及 DNS 解析的规则都应该加 no-resolve，防止 DNS 泄露
-  # - DOMAIN-SUFFIX,baidu.com,DIRECT             # 匹配域名尾缀
-  # - DOMAIN-KEYWORD,baidu,DIRECT                # 匹配域名关键字
-  # - SRC-PORT,9090,DIRECT                       # 匹配出站端口
-  # - DST-PORT,80,PROXY                          # 匹配到站端口
-  # - PROCESS-NAME,QQ.exe,DIRECT                 # 匹配进程名
-  # - GEOIP,LAN,DIRECT,no-resolve                # 地理 IP，地区编码匹配。LAN: 局域网
-  #
-  ###############################################
-
-
-  # 本地 DNS 解析是错误的思维，代理服务器会做解析，应避免本地解析
-  # 规则优先权应这样排序：REJECT -> PROXY -> DIRECT
 
   - DOMAIN,yacd.haishan.me,DIRECT # Clash 调试页面
   - DOMAIN,clash.razord.top,DIRECT # Clash 调试页面

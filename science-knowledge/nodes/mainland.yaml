@@ -1,17 +1,15 @@
 proxies:
+  # 1(06-03)
+  - {"name":"🇨🇳CN_06 | 4.95Mb","server":"47.116.166.178","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
+  # 1(06-03)
+  - {"name":"🇨🇳CN_07 | 2.94Mb","server":"120.26.55.225","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
+  # 1(06-03)
+  - {"name":"🇨🇳CN_08 | 4.34Mb","server":"47.92.152.169","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
+  # 1(06-03)
+  - {"name":"🇨🇳CN_09 | 6.92Mb","server":"120.210.205.59","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
+  # 1(06-03)
   - {"name":"🇨🇳CN_09 | 7.40Mb","server":"112.132.215.12","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_10 |22.03Mb","server":"47.92.152.169","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
+  # 1(06-03)
   - {"name":"🇨🇳CN_11 |17.16Mb","server":"47.104.186.133","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_12 |23.53Mb","server":"103.200.30.8","type":"vmess","country":"🇨🇳CN","port":45458,"uuid":"bbe8249a-3bfe-43c2-fe55-838e7ae13c45","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_14 | 9.86Mb","server":"120.26.55.225","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
+  # 1(06-03)
   - {"name":"🇨🇳CN_15 | 2.78Mb","server":"183.236.51.36","type":"vmess","country":"🇨🇳CN","port":59003,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_47 |10.68Mb","server":"47.116.173.76","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":64,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_48 | 9.14Mb","server":"47.104.186.133","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":64,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_49 | 2.12Mb","server":"183.240.235.168","type":"vmess","country":"🇨🇳CN","port":59003,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":64,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_50 |12.45Mb","server":"114.55.132.202","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":64,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_51 |44.11Mb","server":"47.92.152.169","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":64,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_52 |10.98Mb","server":"120.210.205.82","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":64,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_53 |214.12Mb","server":"107.148.192.156","type":"vmess","country":"🇨🇳CN","port":41911,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":64,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_54 |46.23Mb","server":"112.132.215.12","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":64,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_55 |45.68Mb","server":"112.132.212.19","type":"vmess","country":"🇨🇳CN","port":50004,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":64,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
-  - {"name":"🇨🇳CN_56 |246.04Mb","server":"107.148.192.148","type":"vmess","country":"🇨🇳CN","port":41911,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":64,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}

@@ -35,7 +35,7 @@ proxy-groups:
   - name: AUTO-MAINLAND
     type: url-test
     interval: 600
-    url: http://www.gstatic.com/generate_204
+    url: http://connect.rom.miui.com/generate_204  # 小米测速地址
     use:
       - MAINLAND
 
@@ -66,8 +66,8 @@ proxy-providers:
     interval: 21600
     health-check:
       enable: true
-      interval: 1200
-      url: http://www.gstatic.com/generate_204
+      interval: 600
+      url: http://connect.rom.miui.com/generate_204
 
   CRAZYGEEKY:
     type: http
@@ -76,10 +76,10 @@ proxy-providers:
     interval: 21600
     health-check:
       enable: true
-      interval: 900
+      interval: 86400
       url: http://www.gstatic.com/generate_204
 
 
 rules:
-  - DST-PORT,17500,SELECT-PROXY
+  - DST-PORT,17500,SELECT-PROXY  # 和平精英进入游戏对局端口
   - MATCH,DIRECT
