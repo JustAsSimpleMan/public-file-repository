@@ -1,3 +1,7 @@
 payload: # 自定义黑名单规则，classical 类型
   - DOMAIN,reject-example
   - PROCESS-NAME,adobegcclient.exe
+  - DOMAIN,play.qq.com # QQ秒玩小游戏
+  - DOMAIN-REGEX,.+gamecenter\.qq\.com # QQ游戏中心
+  - DOMAIN-KEYWORD,miniapp.gtimg.cn
+  - DOMAIN-KEYWORD,minigame.gtimg.cn

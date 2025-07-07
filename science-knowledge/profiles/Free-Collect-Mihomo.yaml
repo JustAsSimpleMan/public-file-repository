@@ -20,9 +20,6 @@ dns:
     - '*.lan'
     - '*.msftconnecttest.com'
 
-proxies:
-  - {name: 仅将数量较少的策略组加入自动选择, type: http, server: 127.0.0.1, port: 443}
-
 
 # 策略组
 proxy-groups:
@@ -30,132 +27,168 @@ proxy-groups:
   - name: SELECT-PROXY
     type: select
     proxies:
-      - AUTO-SELECT
-      - crazygeeky
-      - xrayvip
-      - itxve
-      - snakem982
-      - ermaozi
-      - ChatGPT-AUTO
-      - MAINLAND
+      - 负载均衡
+      - 手动选择
+      - 美国
+      - 香港
+      - 新加坡
+      - 日本
+      - ChatGPT
+      - GitHub
+      - YouTube
+      - Telegram
+      - Bing
+      - Microsoft
 
-  - name: AUTO-SELECT
-    type: url-test
-    interval: 864000
-    url: http://www.gstatic.com/generate_204
-    proxies:
-      - 仅将数量较少的策略组加入自动选择
-    use:
-      - crazygeeky
-      - xrayvip
-      - itxve
-      - snakem982
-      - ermaozi
+  - name: 负载均衡
+    type: load-balance
+    url: 'https://www.google.com/'
+    expected-status: 200 # 返回 200 保证可用性
+    interval: 300
+    strategy: consistent-hashing
+    include-all-providers: true
 
-  - name: itxve
+  - name: 手动选择
     type: select
-    use:
-      - itxve
+    url: 'https://www.google.com/'
+    interval: 300
+    expected-status: 200
+    include-all-providers: true
 
-  - name: snakem982
+  - name: 美国
     type: select
-    use:
-      - snakem982
+    url: 'https://www.google.com/'
+    interval: 300
+    expected-status: 200
+    include-all-providers: true
+    filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
 
-  - name: crazygeeky
+  - name: 香港
     type: select
-    use:
-      - crazygeeky
+    url: 'https://www.google.com/'
+    interval: 300
+    expected-status: 200
+    include-all-providers: true
+    filter: (?i)港|HK|hk|Hong Kong|HongKong|hongkong
 
-  - name: xrayvip
+  - name: 新加坡
     type: select
-    use:
-      - xrayvip
+    url: 'https://www.google.com/'
+    interval: 300
+    expected-status: 200
+    include-all-providers: true
+    filter: (?i)新加坡|坡|狮城|SG|Singapore
 
-  - name: ermaozi
+  - name: 日本
     type: select
-    use:
-      - ermaozi
+    url: 'https://www.google.com/'
+    interval: 300
+    expected-status: 200
+    include-all-providers: true
+    filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
 
-  - name: ChatGPT-AUTO
-    type: fallback
-    url: https://chatgpt.com/
-    interval: 600
-    use:
-      - crazygeeky
-      - xrayvip
-      - itxve
-      - snakem982
-      - ermaozi
-
-  - name: MAINLAND
+  - name: ChatGPT
     type: select
-    use:
-      - MAINLAND
+    url: 'https://auth.openai.com/log-in'
+    interval: 300
+    expected-status: 200-302
+    header:
+      User-Agent: ['Mozilla/5.0 (Windows NT 10.0; Win64; x64)']
+    include-all-providers: true
+
+  - name: GitHub
+    type: select
+    url: 'https://github.com/'
+    interval: 300
+    expected-status: 200-302
+    include-all-providers: true
+
+  - name: YouTube
+    type: select
+    url: 'https://www.youtube.com/'
+    interval: 300
+    expected-status: 200-302
+    include-all-providers: true
+
+  - name: Telegram
+    type: select
+    url: 'https://telegram.org/'
+    interval: 300
+    expected-status: 200-302
+    include-all-providers: true
+
+  - name: Bing
+    type: select
+    url: 'https://www.bing.com/'
+    interval: 300
+    expected-status: 200-302
+    include-all-providers: true
+
+  - name: Microsoft
+    type: select
+    url: 'https://www.microsoft.com/'
+    interval: 300
+    expected-status: 200-302
+    include-all-providers: true
 
 
 # 代理供应商
 proxy-providers:
 
-  MAINLAND:
-    type: http
-    url: https://url-transfer.deno.dev?content=oAOn8xrMe2DobET1yUeTWA%3D%3D%2C3u2VlAAeA7IaLMb%2BkB%2BZlyBLHP2IbmN1EaMd3btorefQokuj9M4%2FztA6%2FsNI7aQHARcwRWvq9EeKibfA3ShgMUE3IOsnnEFD2zHI9yBWaHAicuw7yXMOOe3g7ltX5%2BUQBOjNqOy7OpA1rIikBG%2BwminjoS3tVvU5r%2BZS8I0xINgpUp8%3D
-    path: ./providers/proxy/mainland.yaml
-    interval: 21600
-    health-check:
-      enable: true
-      interval: 600
-      url: http://connect.rom.miui.com/generate_204
-
   ermaozi:
     type: http
+    # https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml
     url: https://url-transfer.deno.dev?content=0D46uE0B8%2Bv2w%2F7Ei5pCtA%3D%3D%2CX%2BwFqcHMRLyt%2By1FhKlWuzq0GPozfJs%2FyUO1SK71Io6q5fFGsO2Gw0HCnJXqgrBaWqQ%2B8ogeeJLbadMW3U0LrNselJ32LL1d%2BrVNV%2B4PmyIxYMT2tHZUn%2BlELXnOZHDa
     path: ./providers/proxy/ermaozi.yaml
     interval: 21600
     health-check:
       enable: false
-      interval: 600
-      url: http://www.gstatic.com/generate_204
+      interval: 300
+      url: https://www.gstatic.com/generate_204
 
   crazygeeky:
     type: http
+    # https://proxy.crazygeeky.com/clash/proxies
     url: https://url-transfer.deno.dev?content=TcW9BT5QFRe4U0d65pF5Vw%3D%3D%2CZrt0s3Hf4DR14vpN%2FDyFWLmnce1je64St4RXz1t%2FH1nRkpggwDteIraUhgOZTVSe7iYyU6sQFQ4G5w%3D%3D
     path: ./providers/proxy/crazygeeky.com.yaml
     interval: 21600
     health-check:
-      enable: true
-      interval: 600
-      url: http://www.gstatic.com/generate_204
+      enable: false
+      interval: 300
+      url: https://www.gstatic.com/generate_204
 
   xrayvip:
     type: http
+    # https://www.xrayvip.com/free.yaml
     url: https://url-transfer.deno.dev/?content=vZiLjzwGTNS33%2BTLTgUJ8Q%3D%3D%2CJIBlZ7L%2FSkAmaV%2F9WxeYsN%2BO6D8ZSW%2BWoDMu1bXuZLXucP63vBlqhd45C3gsbPpzEA%3D%3D
     path: ./providers/proxy/xrayvip.yaml
     interval: 21600
     health-check:
-      enable: true
-      interval: 600
-      url: http://www.gstatic.com/generate_204
+      enable: false
+      interval: 300
+      url: https://www.gstatic.com/generate_204
 
   itxve:
     type: http
+    # https://cdn.jsdelivr.net/gh/itxve/fetch-clash-node/node/merge.yaml
     url: https://url-transfer.deno.dev?content=QaT64DW3uPXR0wJqXfa3SQ%3D%3D%2C2UGlfsKBeNGN2rwhpLvcgPyXiDspYThBT6QDhhUjJwPH8r%2FjwGscTSAtg8RvKtBbXXUxFwP2zBkFzKo%2FLZNgICUONLD1eKs6AAfbNrq2UFcMSQ%3D%3D
     path: ./providers/proxy/itxve.yaml
     interval: 21600
     health-check:
-      enable: true
-      interval: 600
-      url: http://www.gstatic.com/generate_204
+      enable: false
+      interval: 300
+      url: https://www.gstatic.com/generate_204
 
   snakem982:
     type: http
+    # https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml
     url: https://url-transfer.deno.dev?content=3XFO36i85G5H6%2BK75hB40A%3D%3D%2CNIImJVea7yNbtBjjjb4lpAA4lpY5G2r4bBLNV2V0mg4cyxQv7HeYVwZJ6%2Bh%2FZp50vK5b0mtSO1QMtoeekS1mR8PjSaBJ3y25g3FwvPy69rUV72MDaZgKsy4dNLSCpxC2BQ%3D%3D
     path: ./providers/proxy/snakem982.yaml
     interval: 21600
     health-check:
-      enable: true
-      interval: 600
-      url: http://www.gstatic.com/generate_204
+      enable: false
+      interval: 300
+      url: https://www.gstatic.com/generate_204
 
 
 rule-providers:
@@ -175,24 +208,6 @@ rule-providers:
     behavior: classical
     url: https://url-transfer.deno.dev/?content=p7IAvqO9%2F7Ci69MlFgkM3A%3D%3D%2Cx2QE4ADC5biByKFHecCxzvVF8Y309XnGAt2zC0yx3Lo6MowTzYJ%2FBqBqHOEZTXjegoqJUtYkICpPI6D9DUj6UUfZF3tbI8NChO3Ns2XaIYB7PV3gdrfdBzk57xCu7%2BRz6%2F0TMUB9cyBtPOASpQFg0d%2FXDjtqk2QFnpt6%2F7ts%2FuftrdGsU0hkOg%3D%3D
     path: ./ruleset/direct-custom.yaml
-
-
-  reject-patch: # 黑名单补丁列表，域名匹配时使用
-    type: http
-    behavior: domain
-    url: https://url-transfer.deno.dev/?content=ecbzMPci6Et8ZTD6U2OMlQ%3D%3D%2CiEzOkIbyyk4FlVGoERP9E1OCFUFHCn6E4LkQZ7yuIONKCOi9KZiIiYjXxhbe2mOdKPWNpuxcbYEiIh1labGJXDjmIjz%2BNTn94oQLCNfGpApTqUYQ%2BxwuaOXvYTQzcfWwdK7wfSYjWnn2MNLDK56q8Xr1lVnkLyfC1OXPKRX1wzMr2APNYBPW
-    path: ./ruleset/reject-patch.yaml
-  proxy-patch: # 代理补丁
-    type: http
-    behavior: domain
-    url: https://url-transfer.deno.dev/?content=TQse8H8h%2FGJeJztHuEms%2BA%3D%3D%2CWl%2FcLGUTbEFfMreNzieGdLGN4NncIb2L80rEFM5XCyme5wKDubOsQcPyoIJN11eDuFuLMFD%2Bcq%2FddpLb505GL110rXj%2FS83PaVLa34GybxmxJKGQqG7THqW5h0w3LQvM1CbuG%2FvDvs4QO2Gq3D%2BF%2BHelLb72mnnKtQjlJGxZS%2BBnoENj1i0%3D
-    path: ./ruleset/proxy-patch.yaml
-  direct-patch: # 直连补丁
-    type: http
-    behavior: domain
-    url: https://url-transfer.deno.dev/?content=LlwShopgjF3qYbqZzDZvaA%3D%3D%2Ccc7doPYds5GaTiDBZ4dWToyO6%2FJwZd%2B6WjJ4ycEnahNrqDD312OXQh2j%2Bxn8lp2VW7aqauUHBiJc0Jy%2Fe8va4UakjYpNQGTRpyktBRyC9a98NqfR06UPSDXk%2Fgv4qGUpXvvZt2jGHoCA2N4%2B2ZjuHM74Rc1zUVoowbEhAr1qvsBQk%2BuUkcjC
-    path: ./ruleset/direct-patch.yaml
-
 
   # 调用第三方规则
   # 直连
@@ -225,18 +240,14 @@ rules:
 
   - DOMAIN,yacd.haishan.me,DIRECT # Clash 调试页面
   - DOMAIN,clash.razord.top,DIRECT # Clash 调试页面
+  - DOMAIN-SUFFIX,deno.dev,SELECT-PROXY # 节点更新走代理
 
   ## 自定义规则
   - RULE-SET,reject-custom,REJECT
   - RULE-SET,proxy-custom,SELECT-PROXY
   - RULE-SET,direct-custom,DIRECT
 
-  ## 对别人整理的规则打补丁
-  - RULE-SET,reject-patch,REJECT
-  - RULE-SET,proxy-patch,SELECT-PROXY
-  - RULE-SET,direct-patch,DIRECT
-  
-  ## 别人整理的规则
+  ## 公开库
   - RULE-SET,reject,REJECT
   - RULE-SET,private,DIRECT
   - RULE-SET,direct,DIRECT

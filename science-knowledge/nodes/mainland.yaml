@@ -8,8 +8,8 @@ proxies:
   # 1(06-03)
   - {"name":"🇨🇳CN_09 | 6.92Mb","server":"120.210.205.59","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
   # 1(06-03)
-  - {"name":"🇨🇳CN_09 | 7.40Mb","server":"112.132.215.12","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
+  - {"name":"🇨🇳CN_10 | 7.40Mb","server":"112.132.215.12","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
   # 1(06-03)
   - {"name":"🇨🇳CN_11 |17.16Mb","server":"47.104.186.133","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
   # 1(06-03)
-  - {"name":"🇨🇳CN_15 | 2.78Mb","server":"183.236.51.36","type":"vmess","country":"🇨🇳CN","port":59003,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
+  - {"name":"🇨🇳CN_12 | 2.78Mb","server":"183.236.51.36","type":"vmess","country":"🇨🇳CN","port":59003,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}

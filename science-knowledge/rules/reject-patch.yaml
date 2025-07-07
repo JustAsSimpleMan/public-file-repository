@@ -1,6 +1,0 @@
-payload: # 黑名单域名补丁
-  - domain-reject-example
-  - play.qq.com # QQ秒玩小游戏
-  - "+.gamecenter.qq.com" # QQ游戏中心
-  - miniapp.gtimg.cn
-  - minigame.gtimg.cn
