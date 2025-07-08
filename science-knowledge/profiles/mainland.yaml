@@ -27,34 +27,29 @@ proxy-groups:
   - name: SELECT-PROXY
     type: select
     proxies:
-      - AUTO-MAINLAND
-      - AUTO-CRAZYGEEKY
-      - MAINLAND
+      - 中国节点
       - CRAZYGEEKY
+      - 手动选择
 
-  - name: AUTO-MAINLAND
+  - name: 中国节点
     type: url-test
+    url: 'http://connect.rom.miui.com/generate_204'  # 小米测速地址
     interval: 900
-    url: http://connect.rom.miui.com/generate_204  # 小米测速地址
-    use:
-      - MAINLAND
-
-  - name: AUTO-CRAZYGEEKY
-    type: url-test
-    interval: 900
-    url: http://www.gstatic.com/generate_204
-    use:
-      - CRAZYGEEKY
-
-  - name: MAINLAND
-    type: select
     use:
       - MAINLAND
 
   - name: CRAZYGEEKY
-    type: select
+    type: url-test
+    url: 'http://connect.rom.miui.com/generate_204'
+    interval: 900
     use:
       - CRAZYGEEKY
+
+  - name: 手动选择
+    type: select
+    url: 'http://connect.rom.miui.com/generate_204'
+    interval: 900
+    include-all-providers: true
 
 
 proxy-providers:
@@ -64,20 +59,13 @@ proxy-providers:
     url: https://url-transfer.deno.dev?content=oAOn8xrMe2DobET1yUeTWA%3D%3D%2C3u2VlAAeA7IaLMb%2BkB%2BZlyBLHP2IbmN1EaMd3btorefQokuj9M4%2FztA6%2FsNI7aQHARcwRWvq9EeKibfA3ShgMUE3IOsnnEFD2zHI9yBWaHAicuw7yXMOOe3g7ltX5%2BUQBOjNqOy7OpA1rIikBG%2BwminjoS3tVvU5r%2BZS8I0xINgpUp8%3D
     path: ./providers/proxy/mainland.yaml
     interval: 21600
-    health-check:
-      enable: true
-      interval: 900
-      url: http://connect.rom.miui.com/generate_204
 
   CRAZYGEEKY:
     type: http
     url: https://url-transfer.deno.dev?content=TcW9BT5QFRe4U0d65pF5Vw%3D%3D%2CZrt0s3Hf4DR14vpN%2FDyFWLmnce1je64St4RXz1t%2FH1nRkpggwDteIraUhgOZTVSe7iYyU6sQFQ4G5w%3D%3D
     path: ./providers/proxy/crazygeeky.com.yaml
     interval: 21600
-    health-check:
-      enable: true
-      interval: 86400
-      url: http://www.gstatic.com/generate_204
+    filter: 中国|CN|China
 
 
 rules:

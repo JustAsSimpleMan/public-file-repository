@@ -42,54 +42,48 @@ proxy-groups:
 
   - name: 负载均衡
     type: load-balance
-    url: 'https://www.google.com/'
-    expected-status: 200 # 返回 200 保证可用性
+    url: 'https://www.gstatic.com/generate_204'  # 范性策略组，应只检查测速是否可达，而不检查对某个地址是否可用（状态码返回 200）
     interval: 300
     strategy: consistent-hashing
     include-all-providers: true
 
   - name: 手动选择
     type: select
-    url: 'https://www.google.com/'
+    url: 'https://www.gstatic.com/generate_204'
     interval: 300
-    expected-status: 200
     include-all-providers: true
 
   - name: 美国
     type: select
-    url: 'https://www.google.com/'
+    url: 'https://www.gstatic.com/generate_204'
     interval: 300
-    expected-status: 200
     include-all-providers: true
     filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
 
   - name: 香港
     type: select
-    url: 'https://www.google.com/'
+    url: 'https://www.gstatic.com/generate_204'
     interval: 300
-    expected-status: 200
     include-all-providers: true
     filter: (?i)港|HK|hk|Hong Kong|HongKong|hongkong
 
   - name: 新加坡
     type: select
-    url: 'https://www.google.com/'
+    url: 'https://www.gstatic.com/generate_204'
     interval: 300
-    expected-status: 200
     include-all-providers: true
     filter: (?i)新加坡|坡|狮城|SG|Singapore
 
   - name: 日本
     type: select
-    url: 'https://www.google.com/'
+    url: 'https://www.gstatic.com/generate_204'
     interval: 300
-    expected-status: 200
     include-all-providers: true
     filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
 
   - name: ChatGPT
     type: select
-    url: 'https://auth.openai.com/log-in'
+    url: 'https://auth.openai.com/log-in'  # 只有明确了目标地址才应该使用相关测速地址，并检查测速状态
     interval: 300
     expected-status: 200-302
     header:
@@ -142,9 +136,9 @@ proxy-providers:
     path: ./providers/proxy/ermaozi.yaml
     interval: 21600
     health-check:
-      enable: false
+      enable: false  # 不进行健康检查
       interval: 300
-      url: https://www.gstatic.com/generate_204
+      url: https://www.gstatic.com/generate_204  # 保留健康检查是因为，当策略组（proxy-groups）未配置 url 时能使用此 url。
 
   crazygeeky:
     type: http
