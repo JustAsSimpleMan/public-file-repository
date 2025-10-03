@@ -28,7 +28,6 @@ proxy-groups:
     type: select
     proxies:
       - 中国节点
-      - CRAZYGEEKY
       - 手动选择
 
   - name: 中国节点
@@ -37,13 +36,6 @@ proxy-groups:
     interval: 900
     use:
       - MAINLAND
-
-  - name: CRAZYGEEKY
-    type: url-test
-    url: 'http://connect.rom.miui.com/generate_204'
-    interval: 900
-    use:
-      - CRAZYGEEKY
 
   - name: 手动选择
     type: select
@@ -59,13 +51,6 @@ proxy-providers:
     url: https://url-transfer.deno.dev?content=oAOn8xrMe2DobET1yUeTWA%3D%3D%2C3u2VlAAeA7IaLMb%2BkB%2BZlyBLHP2IbmN1EaMd3btorefQokuj9M4%2FztA6%2FsNI7aQHARcwRWvq9EeKibfA3ShgMUE3IOsnnEFD2zHI9yBWaHAicuw7yXMOOe3g7ltX5%2BUQBOjNqOy7OpA1rIikBG%2BwminjoS3tVvU5r%2BZS8I0xINgpUp8%3D
     path: ./providers/proxy/mainland.yaml
     interval: 21600
-
-  CRAZYGEEKY:
-    type: http
-    url: https://url-transfer.deno.dev?content=TcW9BT5QFRe4U0d65pF5Vw%3D%3D%2CZrt0s3Hf4DR14vpN%2FDyFWLmnce1je64St4RXz1t%2FH1nRkpggwDteIraUhgOZTVSe7iYyU6sQFQ4G5w%3D%3D
-    path: ./providers/proxy/crazygeeky.com.yaml
-    interval: 21600
-    filter: 中国|CN|China
 
 
 rules:
