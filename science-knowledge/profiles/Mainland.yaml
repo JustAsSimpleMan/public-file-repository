@@ -21,36 +21,34 @@ dns:
     - '*.msftconnecttest.com'
 
 
+proxies:
+  - {"name":"🇨🇳CN_01 | 6.92Mb","server":"120.210.205.59","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
+  - {"name":"🇨🇳CN_02 | 7.40Mb","server":"112.132.215.12","type":"vmess","country":"🇨🇳CN","port":50002,"uuid":"418048af-a293-4b99-9b0c-98ca3580dd24","alterId":0,"cipher":"auto","network":"tcp","http-opts":{},"h2-opts":{},"skip-cert-verify":true}
+
+
 # 策略组
 proxy-groups:
 
   - name: SELECT-PROXY
     type: select
     proxies:
-      - 中国节点
+      - 自动选择
       - 手动选择
 
-  - name: 中国节点
+  - name: 自动选择
     type: url-test
     url: 'http://connect.rom.miui.com/generate_204'  # 小米测速地址
     interval: 900
-    use:
-      - MAINLAND
+    include-all-proxies: true
 
   - name: 手动选择
     type: select
     url: 'http://connect.rom.miui.com/generate_204'
     interval: 900
-    include-all-providers: true
+    include-all-proxies: true
 
 
 proxy-providers:
-
-  MAINLAND:
-    type: http
-    url: https://url-transfer.deno.dev?content=oAOn8xrMe2DobET1yUeTWA%3D%3D%2C3u2VlAAeA7IaLMb%2BkB%2BZlyBLHP2IbmN1EaMd3btorefQokuj9M4%2FztA6%2FsNI7aQHARcwRWvq9EeKibfA3ShgMUE3IOsnnEFD2zHI9yBWaHAicuw7yXMOOe3g7ltX5%2BUQBOjNqOy7OpA1rIikBG%2BwminjoS3tVvU5r%2BZS8I0xINgpUp8%3D
-    path: ./providers/proxy/mainland.yaml
-    interval: 21600
 
 
 rules:

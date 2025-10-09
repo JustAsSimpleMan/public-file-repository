@@ -21,11 +21,15 @@ dns:
     - '*.msftconnecttest.com'
 
 
+proxies:  # ↓ 死灰复燃 ↓
+
+
 # 策略组
 proxy-groups:
 
   - name: SELECT-PROXY
     type: select
+    include-all-proxies: true
     proxies:
       - 负载均衡
       - 手动选择
