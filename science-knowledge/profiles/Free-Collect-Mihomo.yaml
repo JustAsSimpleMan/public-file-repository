@@ -38,6 +38,7 @@ proxy-groups:
       - 新加坡
       - 日本
       - ChatGPT
+      - Gemini
       - GitHub
       - YouTube
       - Telegram
@@ -94,6 +95,15 @@ proxy-groups:
       User-Agent: ['Mozilla/5.0 (Windows NT 10.0; Win64; x64)']
     include-all-providers: true
 
+  - name: Gemini
+    type: select
+    url: 'https://gemini.google.com/'
+    interval: 300
+    expected-status: 200-302
+    header:
+      User-Agent: ['Mozilla/5.0 (Windows NT 10.0; Win64; x64)']
+    include-all-providers: true
+
   - name: GitHub
     type: select
     url: 'https://github.com/'
@@ -133,49 +143,15 @@ proxy-groups:
 # 代理供应商
 proxy-providers:
 
-  ermaozi:
-    type: http
-    # https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml
-    url: https://url-transfer.deno.dev?content=0D46uE0B8%2Bv2w%2F7Ei5pCtA%3D%3D%2CX%2BwFqcHMRLyt%2By1FhKlWuzq0GPozfJs%2FyUO1SK71Io6q5fFGsO2Gw0HCnJXqgrBaWqQ%2B8ogeeJLbadMW3U0LrNselJ32LL1d%2BrVNV%2B4PmyIxYMT2tHZUn%2BlELXnOZHDa
-    path: ./providers/proxy/ermaozi.yaml
-    interval: 21600
-    health-check:
-      enable: false  # 不进行健康检查
-      interval: 300
-      url: https://www.gstatic.com/generate_204  # 保留健康检查是因为，当策略组（proxy-groups）未配置 url 时能使用此 url。
-
-  xrayvip:
-    type: http
-    # https://www.xrayvip.com/free.yaml
-    url: https://url-transfer.deno.dev/?content=vZiLjzwGTNS33%2BTLTgUJ8Q%3D%3D%2CJIBlZ7L%2FSkAmaV%2F9WxeYsN%2BO6D8ZSW%2BWoDMu1bXuZLXucP63vBlqhd45C3gsbPpzEA%3D%3D
-    path: ./providers/proxy/xrayvip.yaml
-    interval: 21600
-    health-check:
-      enable: false
-      interval: 300
-      url: https://www.gstatic.com/generate_204
-
-  itxve:
-    type: http
-    # https://cdn.jsdelivr.net/gh/itxve/fetch-clash-node/node/merge.yaml
-    url: https://url-transfer.deno.dev?content=QaT64DW3uPXR0wJqXfa3SQ%3D%3D%2C2UGlfsKBeNGN2rwhpLvcgPyXiDspYThBT6QDhhUjJwPH8r%2FjwGscTSAtg8RvKtBbXXUxFwP2zBkFzKo%2FLZNgICUONLD1eKs6AAfbNrq2UFcMSQ%3D%3D
-    path: ./providers/proxy/itxve.yaml
-    interval: 21600
-    health-check:
-      enable: false
-      interval: 300
-      url: https://www.gstatic.com/generate_204
-
-  snakem982:
-    type: http
-    # https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml
-    url: https://url-transfer.deno.dev?content=3XFO36i85G5H6%2BK75hB40A%3D%3D%2CNIImJVea7yNbtBjjjb4lpAA4lpY5G2r4bBLNV2V0mg4cyxQv7HeYVwZJ6%2Bh%2FZp50vK5b0mtSO1QMtoeekS1mR8PjSaBJ3y25g3FwvPy69rUV72MDaZgKsy4dNLSCpxC2BQ%3D%3D
-    path: ./providers/proxy/snakem982.yaml
-    interval: 21600
-    health-check:
-      enable: false
-      interval: 300
-      url: https://www.gstatic.com/generate_204
+  # example:
+  #   type: http
+  #   url: https://example/clash.yml
+  #   path: ./providers/proxy/example.yaml
+  #   interval: 21600
+  #   health-check:
+  #     enable: false  # 不进行健康检查
+  #     interval: 300
+  #     url: https://www.gstatic.com/generate_204  # 保留健康检查是因为，当策略组（proxy-groups）未配置 url 时能使用此 url
 
 
 rule-providers:
@@ -201,25 +177,25 @@ rule-providers:
   direct:
     type: http
     behavior: domain
-    url: https://url-transfer.deno.dev/?content=w9afRXskphDp1iAi0JC1cQ%3D%3D%2Cgq%2BHkgRaGBF6RlJ6Dv47fmaGSFco4vw4y%2F7z8qidp8KkunxEL42q6MhOpRTiw7uk3%2B9AfO6MwZVEk2tZlqH2%2F7HJhZ9SduKcQ3ycE10QMY9fXIdXAmGOjU%2Bts833
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt
     path: ./ruleset/direct.yaml
   # 广告
   reject:
     type: http
     behavior: domain
-    url: https://url-transfer.deno.dev/?content=Bkf%2FCbDLCCxqpca%2F2HY1Ng%3D%3D%2CpRbw91GsozcCndiTSQunraRkdeuZ4f2SDyx98hcyR4K6kUbuWqxdsRZumiT%2FrowTcAxM9Xq9GfMsdO6JnkemdjlsE9z8usknViW5p%2B%2FnVqovpydr2%2FZ0dt0r%2BPn%2B
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
     path: ./ruleset/reject.yaml
   # 私有专用域名，如：路由器登录
   private:
     type: http
     behavior: domain
-    url: https://url-transfer.deno.dev/?content=32K107py18FBzMW1nIeHPQ%3D%3D%2CXCr5eMiKwNukKkNpSxZuYiMZ6ELtmR1ZMDEJzxBJs3juX5HUcy9zAMW4LLriz3r4Ok3%2F3WFFKB83RtXxkIxsK1ADYlZHW1gPJlgtZ%2F2K8cKR7B4C4JRSn%2BdkdHVihg%3D%3D
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/private.txt
     path: ./ruleset/private.yaml
   # 中国大陆域名，国外服务器 IP 地址列表
   cncidr:
     type: http
     behavior: ipcidr
-    url: https://url-transfer.deno.dev/?content=oEuhdikzQD%2FfCm7RePHNzA%3D%3D%2COP378jr%2B2H3KUbKRdJimiV6M0HaOZSxVvXXqtsCK5DeImB8KaWisWvfbZ2cDAicJ62JYqjT6lNg6CZrD13m0didGyoiPsVnT5bjNRyLxLwO0D1K4lQ3JX89U%2FmJP
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/cncidr.txt
     path: ./ruleset/cncidr.yaml
 
 
