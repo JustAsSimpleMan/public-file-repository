@@ -1,2 +1,3 @@
 payload: # 自定义直连规则，classical 类型
   - DOMAIN,direct-example
+  - DOMAIN,pairdrop.net
